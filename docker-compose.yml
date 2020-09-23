@@ -1,0 +1,72 @@
+version: '3.5'
+
+services:
+    #device-registry:
+    #    build: ./front_tier/.
+    #    volumes: 
+    #        - ./front_tier/.:/usr/src/app
+    #    ports:
+    #        - 5000:80
+    main:
+        build: ./main_tier/.
+        #links:
+        #    - mysql_db
+        volumes: 
+            - ./main_tier/.:/usr/src/app
+        ports:
+            - 5000:5000
+        networks:
+            #- db-network
+            - backend
+
+    read_event:
+        build: ./read_tier/.
+        links:
+            - mysql_db
+        volumes: 
+            - ./read_tier/.:/usr/src/app
+        ports:
+            - 6000:6000
+        networks:
+            - db-network
+            - backend
+
+    write_event:
+        build: ./write_tier/.
+        links:
+            - mysql_db
+        volumes: 
+            - ./write_tier/.:/usr/src/app
+        ports:
+            - 7000:7000
+        networks:
+            - db-network
+            - backend
+
+    mysql_db:
+        image: mysql
+        environment:
+            #MYSQL_HOST: 'localhost'
+            #MYSQL_DATABASE: 'db1'
+            #MYSQL_USER: 'root'
+            MYSQL_ROOT_PASSWORD: 'root'
+        ports:
+            - "3306:3306"
+        volumes:
+            - my_db:/var/lib/mysql
+        networks:
+            - db-network
+volumes:
+    my_db:
+        external: true
+        name: my-vol1
+
+networks:
+    db-network:
+        external: false
+        name: db-custom-network
+        driver: 'bridge'
+    backend:
+        external: false
+        name: backend-network
+        driver: 'bridge'
