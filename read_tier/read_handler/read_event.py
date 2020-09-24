@@ -22,8 +22,8 @@ class read_sql:
 
   def prepare_query(self,arg1,arg2,arg3):
     print("Beginig")
-    QUERY_WHERE_STR = "where "
-    QUERY_POD_ID = "pod_id="+"'"+arg1+"'"
+    QUERY_WHERE_STR = "where"
+    QUERY_POD_ID = " pod_id="+arg1
     QUERY_TIME_LIMITS = " acitvity_time<"+arg2+" and acitvity_time>"+arg3+";"
     conditionl_query = ''
     if len(arg1) == 0:
