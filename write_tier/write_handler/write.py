@@ -20,8 +20,8 @@ def getEvents():
     #val2 = request.form["Msg"]
     #validate(request)
     req = request.get_json(force=True)
-    val1 = req['Pod']
-    val2 = req['Msg']
+    val1 = req['pod_id']
+    val2 = req['msg']
     reObj = write_sql()
     db_result = reObj.write_data(val1,val2)
     ret_obj = {'write_result':db_result}
