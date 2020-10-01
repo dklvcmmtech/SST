@@ -12,7 +12,7 @@ def hello():
 
 
 @app.route("/events",methods=['POST'])
-def getEvents():
+def postEvents():
     print("GETEVENTS")
     print(a)
     #validate_Function()
