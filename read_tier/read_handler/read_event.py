@@ -24,7 +24,7 @@ class read_sql:
     print("Beginig")
     QUERY_WHERE_STR = "where"
     QUERY_POD_ID = " pod_id="+arg1
-    QUERY_TIME_LIMITS = " acitvity_time<"+arg2+" and acitvity_time>"+arg3+";"
+    QUERY_TIME_LIMITS = " acitvity_time>"+arg2+" and acitvity_time<"+arg3+";"
     conditionl_query = ''
     if len(arg1) == 0:
       conditionl_query = QUERY_WHERE_STR + QUERY_TIME_LIMITS
